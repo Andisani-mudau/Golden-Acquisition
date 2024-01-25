@@ -11,54 +11,6 @@
 </head>
 
 <body>
-    <?php
-    $firstname = $_POST['firstname'];
-    $lastname = $_POST['lastname'];
-    $phone = $_POST['phone'];
-    $career = $_POST['career'];
-    $usermessage = $_POST['message'];
-    $senderEmail = $_POST['email'];
-    $recipientEmail = $_POST['andisanimudau101@gmail.com'];
-
-    // Additional form data retrieval
-    
-    // Process the uploaded PDF file
-    
-    $pdfFile = $_FILES['pdfFile'];
-    $pdfFileName = $pdfFile[$firstname +'_'+ $lastname +'_'+ $career];
-    $pdfFilePath = $pdfFile['tmp_name'];
-    
-    
-    // Email sending logic using PHP's mail() function
-    $to = $recipientEmail;
-    $subject = $firstname+" SENT A CV";
-    $message = "Name: "+$firstname+"\n"+
-    "Surname: "+$lastname+"\n"+
-    "Phone: "+$phone+"\n"+
-    "Career: "+$career+"\n"+
-    "email: "+$senderEmail+"\n"+
-    "Message: "+$usermessage+"\n";
-
-    $headers = "From: $senderEmail\r\n";
-    $headers .= "Reply-To: $senderEmail\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-Type: multipart/mixed; boundary=\"boundary\"\r\n";
-    
-    $attachment = chunk_split(base64_encode(file_get_contents($pdfFilePath)));
-    
-    $message = "--boundary\r\n";
-    $message .= "Content-Type: text/plain; charset=\"iso-8859-1\"\r\n";
-    $message .= "Content-Transfer-Encoding: 7bit\r\n\r\n";
-    $message .= "Message body of your email\r\n";
-    $message .= "--boundary\r\n";
-    $message .= "Content-Type: application/pdf; name=\"$pdfFileName\"\r\n";
-    $message .= "Content-Transfer-Encoding: base64\r\n";
-    $message .= "Content-Disposition: attachment; filename=\"$pdfFileName\"\r\n\r\n";
-    $message .= "$attachment\r\n";
-    $message .= "--boundary--";
-
-    mail($to, $subject, $message, $headers);
-?>
     <nav class="navbar navbar-dark navbar-expand-md sticky-top py-3" id="mainNav" style="--bs-primary: #ffc107;--bs-primary-rgb: 255,193,7;">
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/" style="margin: 0;"><span class="bs-icon-sm bs-icon-circle bs-icon-primary shadow d-flex justify-content-center align-items-center me-2 bs-icon" style="background: url(&quot;assets/img/clipboard-image-3.png&quot;) no-repeat;background-size: 100%;width: 50px;height: 50px;"></span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse text-center" id="navcol-1">
@@ -82,25 +34,23 @@
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                    <div>
-                        <form id="pdfForm" class="p-3 p-xl-4" action="" method="post" enctype="multipart/form-data">
-                            <div class="d-lg-flex align-items-lg-center mb-3" style="gap: 15px;"><input class="form-control form-control" type="text" id="firstname" name="firstname" placeholder="First Name" style="margin: 0;margin-top: 15px;" required=""><input class="form-control form-control" type="text" id="lastname" name="lastname" placeholder="Last Name" style="margin: 0;margin-top: 15px;" required=""></div>
-                            <div class="mb-3"><input class="form-control form-control" type="email" id="email" name="email" placeholder="Email" required=""></div>
-                            <div class="mb-3"><input class="form-control form-control" type="tel" id="phone" name="Phone" placeholder="Phone" required=""></div>
-                            <div class="mb-3"><select class="form-select form-select" id="career" required="">
-                                    <optgroup label="This is a group of careers">
-                                        <option value="1" selected="">Choose a career</option>
-                                        <option value="2">Marketing Specialist</option>
-                                        <option value="3">Sales representative</option>
-                                        <option value="4">Financial Advisor</option>
-                                        <option value="5">Customer Service Associate</option>
-                                    </optgroup>
-                                </select></div>
-                            <div class="mb-3"><input class="form-control form-control" type="file" id="pdfFile" name="CV" accept=".pdf" required="" value="1"></div>
-                            <div class="mb-3"><textarea class="form-control form-control" id="message" name="message" rows="6" placeholder="Message (Optional)"></textarea></div>
-                            <div><button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-primary);">Send CV</button></div>
-                        </form>
-                    </div>
+                    <div><form id="pdfForm" class="p-3 p-xl-4" onsubmit="emailSend3(); reset(); return false;">
+    <div class="d-lg-flex align-items-lg-center mb-3" style="gap: 15px;"><input id="firstname" class="form-control form-control" type="text" name="firstname" placeholder="First Name" style="margin: 0;margin-top: 15px;" required /><input id="lastname" class="form-control form-control" type="text" name="lastname" placeholder="Last Name" style="margin: 0;margin-top: 15px;" required /></div>
+    <div class="mb-3"><input id="email" class="form-control form-control" type="email" name="email" placeholder="Email" required /></div>
+    <div class="mb-3"><input id="phone" class="form-control form-control" type="tel" name="Phone" placeholder="Phone" required /></div>
+    <div class="mb-3"><select id="career" class="form-select form-select" required>
+            <optgroup label="This is a group of careers">
+                <option value="1" selected>Choose a career</option>
+                <option value="Marketing Specialist">Marketing Specialist</option>
+                <option value="Sales representative">Sales representative</option>
+                <option value="Financial Advisor">Financial Advisor</option>
+                <option value="Customer Service Associate">Customer Service Associate</option>
+            </optgroup>
+        </select></div>
+    <div class="mb-3"><input id="pdfFile" class="form-control form-control" type="file" name="CV" accept=".pdf"  value="1" /></div>
+    <div class="mb-3"><textarea id="message" class="form-control form-control" name="message" rows="6" placeholder="Message (Optional)"></textarea></div>
+    <div><button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-primary);">Send </button></div>
+</form></div>
                 </div>
             </div>
         </div>
@@ -153,9 +103,8 @@
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bold-and-dark.js"></script>
-    <script src="assets/js/forminput.js"></script>
-    <script src="assets/js/untitled.js"></script>
-    <script src="assets/js/userinput.js"></script>
+    <script src="assets/js/email.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </body>
 
 </html>

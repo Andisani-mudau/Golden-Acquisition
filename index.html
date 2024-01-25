@@ -154,34 +154,16 @@
                 <div class="col mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="bg-dark border rounded border-dark p-4">The Chief Executive Officer (CEO) holds a pivotal role in steering the company's overall strategy, making key decisions, and ensuring the organization's success.</p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/avatar2.jpg">
-                            <div>
-                                <p class="fw-bold text-primary mb-0">John Smith</p>
-                                <p class="text-muted mb-0">CEO</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="bg-dark border rounded border-dark p-4">The role of Human Resources (HR) is multifaceted, encompassing talent acquisition, employee development, and maintaining a positive workplace culture. </p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/avatar4.jpg">
-                            <div>
-                                <p class="fw-bold text-primary mb-0">John Smith</p>
-                                <p class="text-muted mb-0">HR</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
                 <div class="col d-xl-flex align-items-xl-center mb-4">
                     <div class="d-flex flex-column align-items-center align-items-sm-start">
                         <p class="bg-dark border rounded border-dark p-4">Director, contribute to decision-making, governance, and shaping the organization's direction. </p>
-                        <div class="d-flex"><img class="rounded-circle flex-shrink-0 me-3 fit-cover" width="50" height="50" src="assets/img/team/avatar5.jpg">
-                            <div>
-                                <p class="fw-bold text-primary mb-0">John Smith</p>
-                                <p class="text-muted mb-0">Director</p>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -197,14 +179,14 @@
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-6 col-xl-4">
-                    <div>
-                        <form class="p-3 p-xl-4" action="server_script2.php" method="post">
-                            <div class="mb-3"><input class="form-control" type="text" id="name-1" name="name" placeholder="Name"></div>
-                            <div class="mb-3"><input class="form-control" type="email" id="email-1" name="email" placeholder="Email"></div>
-                            <div class="mb-3"><textarea class="form-control" id="message-1" name="message" rows="6" placeholder="Message"></textarea></div>
-                            <div><button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-primary);box-shadow: 0px 0px 10px 0px var(--bs-primary) !important;border-width: 0px;">Send </button></div>
-                        </form>
-                    </div>
+                    <div><form class="p-3 p-xl-4" onsubmit="emailSend(); reset(); return false;">
+    <div class="mb-3"><input id="name-1" class="form-control form-control" type="text" name="name" placeholder="Name" /></div>
+    <div class="mb-3"><input id="email-1" class="form-control form-control" type="email" name="email" placeholder="Email" /></div>
+    <div class="mb-3"><textarea id="message-1" class="form-control form-control" name="message" rows="6" placeholder="message"></textarea></div>
+    <div><button class="btn btn-primary shadow d-block w-100" type="submit" style="background: var(--bs-primary);box-shadow: 0px 0px 10px 0px var(--bs-primary);border-width: 0px;">Send </button></div>
+</form>
+
+</script></div>
                 </div>
                 <div class="col-md-4 col-xl-4 d-flex justify-content-center justify-content-xl-start">
                     <div class="d-flex flex-wrap flex-md-column justify-content-md-start align-items-md-start h-100">
@@ -246,11 +228,10 @@
                 <div class="text-center text-lg-start py-3 py-lg-1">
                     <h2 class="fw-bold mb-2">Subscribe to our newsletter</h2>
                     <p class="mb-0">Stay up to date with future careers.</p>
-                </div>
-                <form class="d-flex justify-content-center flex-wrap flex-lg-nowrap" action="server_script3.php" method="post">
-                    <div class="my-2"><input class="border rounded-pill shadow-sm form-control" type="email" name="email" placeholder="Your Email"></div>
-                    <div class="my-2"><button class="btn btn-primary shadow ms-2" type="submit" style="background: var(--bs-primary);border-width: 0px;box-shadow: 0px 0px 10px 0px var(--bs-primary) !important;">Subscribe </button></div>
-                </form>
+                </div><form class="d-flex justify-content-center flex-wrap flex-lg-nowrap" onsubmit="emailSend2(); reset(); return false;">
+    <div class="my-2"><input class="border rounded-pill shadow-sm form-control" id="email-2" type="email" name="email" placeholder="Your Email" /></div>
+    <div class="my-2"><button class="btn btn-primary shadow ms-2" type="submit" style="background: var(--bs-primary);border-width: 0px;box-shadow: 0px 0px 10px 0px var(--bs-primary) !important;">Subscribe </button></div>
+</form>
             </div>
         </div>
     </section>
@@ -302,9 +283,8 @@
     </footer>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="assets/js/bold-and-dark.js"></script>
-    <script src="assets/js/forminput.js"></script>
-    <script src="assets/js/untitled.js"></script>
-    <script src="assets/js/userinput.js"></script>
+    <script src="assets/js/email.js"></script>
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
 </body>
 
 </html>
